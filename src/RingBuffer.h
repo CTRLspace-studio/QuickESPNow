@@ -9,11 +9,13 @@
 #ifndef _RINGBUFFER_h
 #define _RINGBUFFER_h
 
-#if defined(ARDUINO) && ARDUINO >= 100
+
+#include "Arduino.h"
+/* #if defined(ARDUINO) && ARDUINO >= 100
 #include "Arduino.h"
 #else
 #include "WProgram.h"
-#endif
+#endif */
 #include "QuickDebug.h"
 
 static const char* RINGBUFFER_DEBUG_TAG = "RINGBUFFER";

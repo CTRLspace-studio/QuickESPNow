@@ -2,6 +2,9 @@
 #if defined ESP32
 #include <WiFi.h>
 #include <esp_wifi.h>
+#elif defined ESP32C3
+#include <WiFi.h>
+#include <esp_wifi.h>
 #elif defined ESP8266
 #include <ESP8266WiFi.h>
 #define WIFI_MODE_STA WIFI_STA 
