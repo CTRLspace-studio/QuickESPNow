@@ -30,7 +30,7 @@ void dataSent (uint8_t* address, uint8_t status) {
 }
 
 void dataReceived (uint8_t* address, uint8_t* data, uint8_t len, signed int rssi, bool broadcast) {
-    Serial.print ("Received: ");
+    Serial.print ("\033[1;96mReceived:\033[0m");
     Serial.printf ("%.*s\n", len, data);
     Serial.printf ("RSSI: %d dBm\n", rssi);
     Serial.printf ("From: " MACSTR "\n", MAC2STR (address));
