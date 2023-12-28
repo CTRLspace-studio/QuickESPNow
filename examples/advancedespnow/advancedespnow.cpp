@@ -13,7 +13,7 @@
 #endif //ESP32
 #include <QuickEspNow.h>
 
-static const String msg = "Hello ESP-NOW!";
+static const String msg = "";
 
 static uint8_t receiver[] = { 0x12, 0x34, 0x56, 0x78, 0x90, 0x12 };
 
@@ -22,7 +22,7 @@ static uint8_t receiver[] = { 0x12, 0x34, 0x56, 0x78, 0x90, 0x12 };
 
 bool sent = true;
 
-const unsigned int SEND_MSG_MSEC = 2000;
+const unsigned int SEND_MSG_MSEC = 1;
 
 void dataSent (uint8_t* address, uint8_t status) {
     sent = true;
@@ -30,10 +30,10 @@ void dataSent (uint8_t* address, uint8_t status) {
 }
 
 void dataReceived (uint8_t* address, uint8_t* data, uint8_t len, signed int rssi, bool broadcast) {
-    Serial.print ("\033[1;96mReceived:\033[0m");
-    Serial.printf ("%.*s\n", len, data);
-    Serial.printf ("RSSI: %d dBm\n", rssi);
-    Serial.printf ("From: " MACSTR "\n", MAC2STR (address));
+    Serial.print ("\033[1;96mReceived: \033[0m");
+    Serial.printf ("%.*s\t%d\t", len, data, len);
+    Serial.printf ("RSSI: %d dBm\t", rssi);
+    Serial.printf ("From: " MACSTR "\t", MAC2STR (address));
     Serial.printf ("%s\n", broadcast ? "Broadcast" : "Unicast");
 }
 
@@ -58,18 +58,18 @@ void loop () {
     static time_t lastSend = 0;
     static unsigned int counter = 0;
 
-     // Sent flag is needed to wait for the message to be actually sent. Avoids messages dropping, maximizing throughput.
+  /*    // Sent flag is needed to wait for the message to be actually sent. Avoids messages dropping, maximizing throughput.
     if (sent && ((millis () - lastSend) > SEND_MSG_MSEC)) {
         lastSend = millis ();
         String message = String (msg) + " " + String (counter++);
         sent = false;
         if (!quickEspNow.send (DEST_ADDR, (uint8_t*)message.c_str (), message.length ())) {
-            Serial.printf (">>>>>>>>>> Message sent\n");
+            Serial.printf ("\033[1;44mSENT: %s \t\033[0m", message);
         } else {
-            Serial.printf (">>>>>>>>>> Message not sent\n");
+            Serial.printf ("\033[1;41mNOT SENT\033[0mT ");
             sent = true;
         }
 
-    }
+    } */
 
 }
